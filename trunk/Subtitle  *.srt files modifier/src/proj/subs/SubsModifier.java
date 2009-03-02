@@ -49,12 +49,12 @@ public class SubsModifier extends JFrame {
      * Message constants
      */
     private static final String FILE_EXT_TYPE = "srt";
-    private static final String CANT_SEARCH_DIR_ERROR = "Текущата директория не може да бъде претърсена!";
-    private static final String NO_FILES_FOUND_INFO = "Няма намерени файлове!";
-    private static final String IO_ERROR = "Грешка при входноизходна операция!";
-    private static final String READY_MESSAGE = "Край на сканирането!";
-    private static final String TITLE_ERROR = "Грешка";
-    private static final String TITLE_RESULT = "Резултат";
+    private static final String CANT_SEARCH_DIR_ERROR = "Current directory cannot be traced!";
+    private static final String NO_FILES_FOUND_INFO = "There aren't subtitle files!";
+    private static final String IO_ERROR = "IO error!";
+    private static final String READY_MESSAGE = "End of scanning!";
+    private static final String TITLE_ERROR = "Error";
+    private static final String TITLE_RESULT = "Result";
     private static final String EMPTY_STRING = "";
     private static final byte MESS_TYPE_ERR = 0;
     private static final byte MESS_TYPE_INFO = 1;
