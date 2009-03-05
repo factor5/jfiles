@@ -44,5 +44,6 @@ public interface Const {
     public static final String DOT_CHAR = ".";
     public static final byte DIGIT_TYPE = 1;
     public static final byte DOT_TYPE = 0;
+    public static final String NEGATIVE_SIGN = "-";
     
 }
