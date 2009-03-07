@@ -7,7 +7,7 @@ import javax.swing.border.*;
 import info.clearthought.layout.*;
 
 /**
- * @author 
+ * @author
  */
 public class Elka extends JFrame implements Const {
 
@@ -41,6 +41,8 @@ public class Elka extends JFrame implements Const {
     private JButton btnPLUS;
     private JButton btnRESULT;
 
+    private Map<Integer, JButton> buttonMap;
+
     private Dimension btnPrefSize = new Dimension(30, 30);
     private Dimension btnMinSize = new Dimension(20, 20);
     private Dimension btnMaxSize = new Dimension(35, 35);
@@ -62,6 +64,31 @@ public class Elka extends JFrame implements Const {
 		Elka elka = new Elka();
 	    }
 	});
+    }
+
+    /**
+     * Creates a button map that may be used for quick access to the concrete
+     * button object through the ascii code used as map key.
+     */
+    private void prepareButtonMap() {
+	buttonMap = new HashMap<Integer, JButton>();
+	buttonMap.put(Const.ZERO, btn0);
+	buttonMap.put(Const.ONE, btn1);
+	buttonMap.put(Const.TWO, btn2);
+	buttonMap.put(Const.THREE, btn3);
+	buttonMap.put(Const.FOUR, btn4);
+	buttonMap.put(Const.FIVE, btn5);
+	buttonMap.put(Const.SIX, btn6);
+	buttonMap.put(Const.SEVEN, btn7);
+	buttonMap.put(Const.EIGHT, btn8);
+	buttonMap.put(Const.NINE, btn9);
+	buttonMap.put(Const.PLUS, btnPLUS);
+	buttonMap.put(Const.MINUS, btnSUB);
+	buttonMap.put(Const.MULTIPLY, btnMUL);
+	buttonMap.put(Const.DIVIDE, btnDIV);
+	buttonMap.put(Const.DEC_DOT, btnDOT);
+	buttonMap.put(Const.C, btnC);
+	buttonMap.put(Const.BACK, btnBACK);
     }
 
     private void initComponents() {
@@ -95,6 +122,8 @@ public class Elka extends JFrame implements Const {
 	btnDOT = new JButton();
 	btnPLUS = new JButton();
 	btnRESULT = new JButton();
+
+	prepareButtonMap();
 
 	Calculation calc = new Calculation(this);
 
@@ -174,6 +203,7 @@ public class Elka extends JFrame implements Const {
 	btnMC.setForeground(Color.red);
 	btnMC.addActionListener(calc);
 	btnMC.addKeyListener(calc);
+
 	contentPane.add(btnMC, new TableLayoutConstraints(1, 3, 1, 3,
 		TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
@@ -552,5 +582,267 @@ public class Elka extends JFrame implements Const {
      */
     public void setDisplay(JTextField display) {
 	this.display = display;
+    }
+
+    /**
+     * @return the btn7
+     */
+    public JButton getBtn7() {
+	return btn7;
+    }
+
+    /**
+     * @param btn7
+     *                the btn7 to set
+     */
+    public void setBtn7(JButton btn7) {
+	this.btn7 = btn7;
+    }
+
+    /**
+     * @return the btn8
+     */
+    public JButton getBtn8() {
+	return btn8;
+    }
+
+    /**
+     * @param btn8
+     *                the btn8 to set
+     */
+    public void setBtn8(JButton btn8) {
+	this.btn8 = btn8;
+    }
+
+    /**
+     * @return the btn9
+     */
+    public JButton getBtn9() {
+	return btn9;
+    }
+
+    /**
+     * @param btn9
+     *                the btn9 to set
+     */
+    public void setBtn9(JButton btn9) {
+	this.btn9 = btn9;
+    }
+
+    /**
+     * @return the btn4
+     */
+    public JButton getBtn4() {
+	return btn4;
+    }
+
+    /**
+     * @param btn4
+     *                the btn4 to set
+     */
+    public void setBtn4(JButton btn4) {
+	this.btn4 = btn4;
+    }
+
+    /**
+     * @return the btn5
+     */
+    public JButton getBtn5() {
+	return btn5;
+    }
+
+    /**
+     * @param btn5
+     *                the btn5 to set
+     */
+    public void setBtn5(JButton btn5) {
+	this.btn5 = btn5;
+    }
+
+    /**
+     * @return the btn6
+     */
+    public JButton getBtn6() {
+	return btn6;
+    }
+
+    /**
+     * @param btn6
+     *                the btn6 to set
+     */
+    public void setBtn6(JButton btn6) {
+	this.btn6 = btn6;
+    }
+
+    /**
+     * @return the btn1
+     */
+    public JButton getBtn1() {
+	return btn1;
+    }
+
+    /**
+     * @param btn1
+     *                the btn1 to set
+     */
+    public void setBtn1(JButton btn1) {
+	this.btn1 = btn1;
+    }
+
+    /**
+     * @return the btn2
+     */
+    public JButton getBtn2() {
+	return btn2;
+    }
+
+    /**
+     * @param btn2
+     *                the btn2 to set
+     */
+    public void setBtn2(JButton btn2) {
+	this.btn2 = btn2;
+    }
+
+    /**
+     * @return the btn3
+     */
+    public JButton getBtn3() {
+	return btn3;
+    }
+
+    /**
+     * @param btn3
+     *                the btn3 to set
+     */
+    public void setBtn3(JButton btn3) {
+	this.btn3 = btn3;
+    }
+
+    /**
+     * @return the btn0
+     */
+    public JButton getBtn0() {
+	return btn0;
+    }
+
+    /**
+     * @param btn0
+     *                the btn0 to set
+     */
+    public void setBtn0(JButton btn0) {
+	this.btn0 = btn0;
+    }
+
+    /**
+     * @return the btnDIV
+     */
+    public JButton getBtnDIV() {
+	return btnDIV;
+    }
+
+    /**
+     * @param btnDIV
+     *                the btnDIV to set
+     */
+    public void setBtnDIV(JButton btnDIV) {
+	this.btnDIV = btnDIV;
+    }
+
+    /**
+     * @return the btnMUL
+     */
+    public JButton getBtnMUL() {
+	return btnMUL;
+    }
+
+    /**
+     * @param btnMUL
+     *                the btnMUL to set
+     */
+    public void setBtnMUL(JButton btnMUL) {
+	this.btnMUL = btnMUL;
+    }
+
+    /**
+     * @return the btnSUB
+     */
+    public JButton getBtnSUB() {
+	return btnSUB;
+    }
+
+    /**
+     * @param btnSUB
+     *                the btnSUB to set
+     */
+    public void setBtnSUB(JButton btnSUB) {
+	this.btnSUB = btnSUB;
+    }
+
+    /**
+     * @return the btnDOT
+     */
+    public JButton getBtnDOT() {
+	return btnDOT;
+    }
+
+    /**
+     * @param btnDOT
+     *                the btnDOT to set
+     */
+    public void setBtnDOT(JButton btnDOT) {
+	this.btnDOT = btnDOT;
+    }
+
+    /**
+     * @return the btnPLUS
+     */
+    public JButton getBtnPLUS() {
+	return btnPLUS;
+    }
+
+    /**
+     * @param btnPLUS
+     *                the btnPLUS to set
+     */
+    public void setBtnPLUS(JButton btnPLUS) {
+	this.btnPLUS = btnPLUS;
+    }
+
+    /**
+     * @return the btnRESULT
+     */
+    public JButton getBtnRESULT() {
+	return btnRESULT;
+    }
+
+    /**
+     * @param btnRESULT
+     *                the btnRESULT to set
+     */
+    public void setBtnRESULT(JButton btnRESULT) {
+	this.btnRESULT = btnRESULT;
+    }
+
+    /**
+     * @return the btnC
+     */
+    public JButton getBtnC() {
+	return btnC;
+    }
+
+    /**
+     * @param btnC
+     *                the btnC to set
+     */
+    public void setBtnC(JButton btnC) {
+	this.btnC = btnC;
+    }
+
+    /**
+     * @return the buttonMap
+     */
+    public Map<Integer, JButton> getButtonMap() {
+	return buttonMap;
     }
 }
