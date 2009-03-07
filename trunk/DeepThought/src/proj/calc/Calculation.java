@@ -8,8 +8,11 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
 
 /**
  * 
@@ -35,7 +38,12 @@ public class Calculation implements ActionListener, KeyListener, ItemListener,
      */
     private boolean isFloating = false;
 
+    /**
+     * Bundle with button labels.
+     */
     private ResourceBundle bundle;
+
+    private Map<Integer, JButton> buttonMap;
 
     /**
      * Constructor.
@@ -46,6 +54,7 @@ public class Calculation implements ActionListener, KeyListener, ItemListener,
     public Calculation(Elka elka) {
 	this.elka = elka;
 	bundle = ResourceBundle.getBundle("labels");
+	buttonMap = elka.getButtonMap();
     }
 
     @Override
@@ -116,7 +125,7 @@ public class Calculation implements ActionListener, KeyListener, ItemListener,
 	    showResult(result);
 	}
     }
-    
+
     private void updateResult(String newValue) {
 	result.setLength(0);
 	// TODO check for length and truncate
@@ -221,6 +230,12 @@ public class Calculation implements ActionListener, KeyListener, ItemListener,
 	showResult(result);
     }
 
+    /**
+     * Checks if the result (number taken from the display) is negative one or
+     * not.
+     * 
+     * @return true if is negative or false otherwise
+     */
     private boolean isNegative() {
 	char sign = result.charAt(0);
 	if (sign == '-') {
@@ -241,18 +256,21 @@ public class Calculation implements ActionListener, KeyListener, ItemListener,
 
     @Override
     public void keyPressed(KeyEvent e) {
+	// System.out.println(e.getKeyChar() + ":" + e.getKeyCode());
 
+	int keyCode = e.getKeyCode();
+	JButton button;
+	if (buttonMap.containsKey(keyCode)) {
+	    button = buttonMap.get(keyCode);
+	    button.doClick();
+	}
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) { }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) { }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
