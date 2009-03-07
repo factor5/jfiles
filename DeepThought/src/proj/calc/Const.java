@@ -46,4 +46,22 @@ public interface Const {
     public static final byte DOT_TYPE = 0;
     public static final String NEGATIVE_SIGN = "-";
     
+    public static final int ZERO = 96;
+    public static final int ONE = 97;
+    public static final int TWO = 98;
+    public static final int THREE = 99;
+    public static final int FOUR = 100;
+    public static final int FIVE = 101;
+    public static final int SIX = 102;
+    public static final int SEVEN = 103;
+    public static final int EIGHT = 104;
+    public static final int NINE = 105;
+    public static final int PLUS = 107;
+    public static final int MINUS = 109;
+    public static final int MULTIPLY = 106;
+    public static final int DIVIDE = 111;
+    public static final int DEC_DOT = 110;
+    public static final int C = 27;
+    public static final int BACK = 8;
+    
 }
