@@ -10,6 +10,7 @@ package proj.calc;
  */
 public interface Const {
 
+    // ------------- action commands ----------------
     public static final String BACKSPACE = "BACKSPACE";
     public static final String CE = "CE";
     public static final String CLEAR = "CLEAR";
@@ -37,7 +38,8 @@ public interface Const {
     public static final String SUB = "SUB";
     public static final String ADD = "ADD";
     public static final String RES = "RES";
-    
+
+    // ------------- constants ----------------    
     public static final String RESULT_ZERO = "0";
     public static final String EMPTY_STRING = "";
     public static final int MAX_LENGHT = 32;
@@ -46,6 +48,7 @@ public interface Const {
     public static final byte DOT_TYPE = 0;
     public static final String NEGATIVE_SIGN = "-";
     
+    // --------- ascii codes for keyboard keys ---------
     public static final int ZERO = 96;
     public static final int ONE = 97;
     public static final int TWO = 98;
