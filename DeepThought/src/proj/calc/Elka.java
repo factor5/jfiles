@@ -125,7 +125,7 @@ public class Elka extends JFrame implements Const {
 
 	prepareButtonMap();
 
-	Calculation calc = new Calculation(this);
+	CalculationLogic calc = new CalculationLogic(this);
 
 	// ======== this ========
 	Container contentPane = getContentPane();
@@ -163,6 +163,7 @@ public class Elka extends JFrame implements Const {
 	btnBACK.setFont(btnFont);
 	btnBACK.setMargin(btnMargin);
 	btnBACK.setBorder(btnBorder);
+	btnBACK.setForeground(Color.red);
 	btnBACK.addActionListener(calc);
 	btnBACK.addKeyListener(calc);
 	contentPane.add(btnBACK, new TableLayoutConstraints(1, 2, 2, 2,
@@ -174,6 +175,7 @@ public class Elka extends JFrame implements Const {
 	btnCE.setFont(btnFont);
 	btnCE.setMargin(btnMargin);
 	btnCE.setBorder(btnBorder);
+	btnCE.setForeground(Color.red);
 	btnCE.addActionListener(calc);
 	btnCE.addKeyListener(calc);
 	contentPane.add(btnCE, new TableLayoutConstraints(3, 2, 4, 2,
@@ -185,6 +187,7 @@ public class Elka extends JFrame implements Const {
 	btnC.setFont(btnFont);
 	btnC.setMargin(btnMargin);
 	btnC.setBorder(btnBorder);
+	btnC.setForeground(Color.red);
 	btnC.addActionListener(calc);
 	btnC.addKeyListener(calc);
 	contentPane.add(btnC, new TableLayoutConstraints(5, 2, 6, 2,
@@ -198,12 +201,10 @@ public class Elka extends JFrame implements Const {
 	btnMC.setPreferredSize(btnPrefSize);
 	btnMC.setMinimumSize(btnMinSize);
 	btnMC.setMaximumSize(btnMaxSize);
-	btnMC.setFocusable(false);
 	btnMC.setBorder(btnBorder);
 	btnMC.setForeground(Color.red);
 	btnMC.addActionListener(calc);
 	btnMC.addKeyListener(calc);
-
 	contentPane.add(btnMC, new TableLayoutConstraints(1, 3, 1, 3,
 		TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
@@ -215,7 +216,6 @@ public class Elka extends JFrame implements Const {
 	btn7.setPreferredSize(btnPrefSize);
 	btn7.setMinimumSize(btnMinSize);
 	btn7.setMaximumSize(btnMaxSize);
-	btn7.setFocusable(false);
 	btn7.setBorder(btnBorder);
 	btn7.addActionListener(calc);
 	btn7.addKeyListener(calc);
@@ -230,7 +230,6 @@ public class Elka extends JFrame implements Const {
 	btn8.setPreferredSize(btnPrefSize);
 	btn8.setMinimumSize(btnMinSize);
 	btn8.setMaximumSize(btnMaxSize);
-	btn8.setFocusable(false);
 	btn8.setBorder(btnBorder);
 	btn8.addActionListener(calc);
 	btn8.addKeyListener(calc);
@@ -245,7 +244,6 @@ public class Elka extends JFrame implements Const {
 	btn9.setPreferredSize(btnPrefSize);
 	btn9.setMinimumSize(btnMinSize);
 	btn9.setMaximumSize(btnMaxSize);
-	btn9.setFocusable(false);
 	btn9.setBorder(btnBorder);
 	btn9.addActionListener(calc);
 	btn9.addKeyListener(calc);
@@ -260,7 +258,7 @@ public class Elka extends JFrame implements Const {
 	btnDIV.setPreferredSize(btnPrefSize);
 	btnDIV.setMinimumSize(btnMinSize);
 	btnDIV.setMaximumSize(btnMaxSize);
-	btnDIV.setFocusable(false);
+	btnDIV.setForeground(Color.red);
 	btnDIV.setBorder(btnBorder);
 	btnDIV.addActionListener(calc);
 	btnDIV.addKeyListener(calc);
@@ -275,7 +273,7 @@ public class Elka extends JFrame implements Const {
 	btnSQRT.setPreferredSize(btnPrefSize);
 	btnSQRT.setMinimumSize(btnMinSize);
 	btnSQRT.setMaximumSize(btnMaxSize);
-	btnSQRT.setFocusable(false);
+	btnSQRT.setForeground(Color.red);
 	btnSQRT.setBorder(btnBorder);
 	btnSQRT.addActionListener(calc);
 	btnSQRT.addKeyListener(calc);
@@ -290,7 +288,7 @@ public class Elka extends JFrame implements Const {
 	btnMR.setPreferredSize(btnPrefSize);
 	btnMR.setMinimumSize(btnMinSize);
 	btnMR.setMaximumSize(btnMaxSize);
-	btnMR.setFocusable(false);
+	btnMR.setForeground(Color.red);
 	btnMR.setBorder(btnBorder);
 	btnMR.addActionListener(calc);
 	btnMR.addKeyListener(calc);
@@ -350,7 +348,7 @@ public class Elka extends JFrame implements Const {
 	btnMUL.setPreferredSize(btnPrefSize);
 	btnMUL.setMinimumSize(btnMinSize);
 	btnMUL.setMaximumSize(btnMaxSize);
-	btnMUL.setFocusable(false);
+	btnMUL.setForeground(Color.red);
 	btnMUL.setBorder(btnBorder);
 	btnMUL.addActionListener(calc);
 	btnMUL.addKeyListener(calc);
@@ -365,7 +363,7 @@ public class Elka extends JFrame implements Const {
 	btnPERC.setPreferredSize(btnPrefSize);
 	btnPERC.setMinimumSize(btnMinSize);
 	btnPERC.setMaximumSize(btnMaxSize);
-	btnPERC.setFocusable(false);
+	btnPERC.setForeground(Color.red);
 	btnPERC.setBorder(btnBorder);
 	btnPERC.addActionListener(calc);
 	btnPERC.addKeyListener(calc);
@@ -380,7 +378,7 @@ public class Elka extends JFrame implements Const {
 	btnMS.setPreferredSize(btnPrefSize);
 	btnMS.setMinimumSize(btnMinSize);
 	btnMS.setMaximumSize(btnMaxSize);
-	btnMS.setFocusable(false);
+	btnMS.setForeground(Color.red);
 	btnMS.setBorder(btnBorder);
 	btnMS.addActionListener(calc);
 	btnMS.addKeyListener(calc);
@@ -440,7 +438,7 @@ public class Elka extends JFrame implements Const {
 	btnSUB.setPreferredSize(btnPrefSize);
 	btnSUB.setMinimumSize(btnMinSize);
 	btnSUB.setMaximumSize(btnMaxSize);
-	btnSUB.setFocusable(false);
+	btnSUB.setForeground(Color.red);
 	btnSUB.setBorder(btnBorder);
 	btnSUB.addActionListener(calc);
 	btnSUB.addKeyListener(calc);
@@ -455,7 +453,7 @@ public class Elka extends JFrame implements Const {
 	btnFRAC.setPreferredSize(btnPrefSize);
 	btnFRAC.setMinimumSize(btnMinSize);
 	btnFRAC.setMaximumSize(btnMaxSize);
-	btnFRAC.setFocusable(false);
+	btnFRAC.setForeground(Color.red);
 	btnFRAC.setBorder(btnBorder);
 	btnFRAC.addActionListener(calc);
 	btnFRAC.addKeyListener(calc);
@@ -470,7 +468,7 @@ public class Elka extends JFrame implements Const {
 	btnMPLUS.setPreferredSize(btnPrefSize);
 	btnMPLUS.setMinimumSize(btnMinSize);
 	btnMPLUS.setMaximumSize(btnMaxSize);
-	btnMPLUS.setFocusable(false);
+	btnMPLUS.setForeground(Color.red);
 	btnMPLUS.setBorder(btnBorder);
 	btnMPLUS.addActionListener(calc);
 	btnMPLUS.addKeyListener(calc);
@@ -500,7 +498,7 @@ public class Elka extends JFrame implements Const {
 	btnSIGN.setPreferredSize(btnPrefSize);
 	btnSIGN.setMinimumSize(btnMinSize);
 	btnSIGN.setMaximumSize(btnMaxSize);
-	btnSIGN.setFocusable(false);
+	btnSIGN.setForeground(Color.red);
 	btnSIGN.setBorder(btnBorder);
 	btnSIGN.addActionListener(calc);
 	btnSIGN.addKeyListener(calc);
@@ -515,7 +513,7 @@ public class Elka extends JFrame implements Const {
 	btnDOT.setPreferredSize(btnPrefSize);
 	btnDOT.setMinimumSize(btnMinSize);
 	btnDOT.setMaximumSize(btnMaxSize);
-	btnDOT.setFocusable(false);
+	btnDOT.setForeground(Color.red);
 	btnDOT.setBorder(btnBorder);
 	btnDOT.addActionListener(calc);
 	btnDOT.addKeyListener(calc);
@@ -530,7 +528,7 @@ public class Elka extends JFrame implements Const {
 	btnPLUS.setPreferredSize(btnPrefSize);
 	btnPLUS.setMinimumSize(btnMinSize);
 	btnPLUS.setMaximumSize(btnMaxSize);
-	btnPLUS.setFocusable(false);
+	btnPLUS.setForeground(Color.red);
 	btnPLUS.setBorder(btnBorder);
 	btnPLUS.addActionListener(calc);
 	btnPLUS.addKeyListener(calc);
@@ -545,7 +543,7 @@ public class Elka extends JFrame implements Const {
 	btnRESULT.setPreferredSize(btnPrefSize);
 	btnRESULT.setMinimumSize(btnMinSize);
 	btnRESULT.setMaximumSize(btnMaxSize);
-	btnRESULT.setFocusable(false);
+	btnRESULT.setForeground(Color.red);
 	btnRESULT.setBorder(btnBorder);
 	btnRESULT.setForeground(Color.red);
 	btnRESULT.addActionListener(calc);
