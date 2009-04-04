@@ -43,12 +43,15 @@ public class SubsModifier extends JFrame {
      */
     List<String> pathList = null;
 
-    private static final String[] NEEDED_STR = { "<i>", "</i>", "<b>", "</b>" };
+    /**
+     * Array containing the strings to be removed from the file.
+     */
+    private String[] strings = null;
 
     /**
      * Message constants
      */
-    private static final String FILE_EXT_TYPE = "srt";
+    public static String FILE_EXT_TYPE;
     private static final String CANT_SEARCH_DIR_ERROR = "Current directory cannot be traced!";
     private static final String NO_FILES_FOUND_INFO = "There aren't subtitle files!";
     private static final String IO_ERROR = "IO error!";
@@ -69,7 +72,7 @@ public class SubsModifier extends JFrame {
      * @param type
      *                the type of the option pane (error=0, warning=1)
      */
-    private void displayMessage(String msg, String title, byte type) {
+    public void displayMessage(String msg, String title, byte type) {
 	JOptionPane.showMessageDialog(null, msg, title, type);
     }
 
@@ -77,7 +80,8 @@ public class SubsModifier extends JFrame {
      * Dispatches the method in way so to perform the task that this class is
      * intended to do.
      */
-    public void modifyFiles() {
+    public void modifyFiles(String[] strings) {
+	this.strings = strings;
 	String curDirectory = "";
 	try {
 	    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -156,8 +160,8 @@ public class SubsModifier extends JFrame {
 		String buferAsString = "";
 		if (bufer.length() > 0) {
 		    buferAsString = bufer.toString();
-		    for (int i = 0; i < NEEDED_STR.length; i++) {
-			buferAsString = buferAsString.replaceAll(NEEDED_STR[i], EMPTY_STRING);
+		    for (int i = 0; i < strings.length; i++) {
+			buferAsString = buferAsString.replaceAll(strings[i], EMPTY_STRING);
 		    }
 		}
 		writeFile(buferAsString, path);
