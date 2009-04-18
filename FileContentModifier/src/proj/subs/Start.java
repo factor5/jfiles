@@ -30,7 +30,7 @@ public class Start {
     public String[] loadProperties() throws MissingResourceException {
 	bundle = ResourceBundle.getBundle("config");
 	String PREFIX = bundle.getString("prefix");
-	SubsModifier.FILE_EXT_TYPE = bundle.getString("fileExt");
+	FileModifier.FILE_EXT_TYPE = bundle.getString("fileExt");
 	List<String> strings = new LinkedList<String>();
 	Set<String> keys = bundle.keySet();
 	for (String key : keys) {
@@ -47,14 +47,14 @@ public class Start {
      */
     public static void main(String args[]) {
 	Start starter = new Start();
-	SubsModifier sm = new SubsModifier();
+	FileModifier sm = new FileModifier();
 	String[] strings = null;
 	try {
 	    strings = starter.loadProperties();
 	    if (strings == null) {
 		throw new Exception();
 	    }
-	    sm.modifyFiles(strings);
+	    sm.startModifying(strings);
 	} catch (MissingResourceException e) {
 	    sm
 		    .displayMessage(
