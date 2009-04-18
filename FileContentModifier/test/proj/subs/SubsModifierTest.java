@@ -17,16 +17,16 @@ import org.testng.annotations.Test;
 @Test
 public class SubsModifierTest {
 
-    private SubsModifier subMod;
+    private FileModifier subMod;
     
     @BeforeTest
     public void init() {
-	subMod = new SubsModifier();
+	subMod = new FileModifier();
     }
     
     @Test
     public void findCurrentDirectoryTest() throws IOException {
-	String currentDir = "C:\\dev\\workspaces\\itpms\\SubsMod";
+	String currentDir = "C:\\dev\\workspaces\\itpms\\FileContentModifier";
 	Assert.assertEquals(subMod.findCurrentDirectory(), currentDir);
     }
     
