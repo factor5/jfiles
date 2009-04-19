@@ -20,11 +20,10 @@ import javax.swing.JOptionPane;
 import proj.mod.logger.WindowLogger;
 
 /**
- * SubsModifier is a simple class that provide methods for tracing the directory
- * where the class is placed and to search for subtitle files with *.srt
- * extension. If such kind of file or files are found then they are parsed and
- * all the found tags like '<i>, </i>, <b> and </b>' in those files are removed
- * and files are saved back.
+ * FileModifier is a class that provide methods for tracing the directory where
+ * the class is placed and to search for files with required extension. If such
+ * kind of file or files are found then they are parsed and all found parts like
+ * in those files are removed and files are saved back.
  * 
  * @author Svilen Velikov
  * 
@@ -48,7 +47,7 @@ public class FileModifier extends JFrame {
     /**
      * Array containing the strings to be removed from the file.
      */
-    private String[] strings = null;
+    private String[][] strings = null;
 
     /**
      * Reference to window logger.
@@ -68,6 +67,13 @@ public class FileModifier extends JFrame {
     private static final String EMPTY_STRING = "";
     private static final byte MESS_TYPE_ERR = 0;
     private static final byte MESS_TYPE_INFO = 1;
+    
+    /**
+     * 
+     */
+    public FileModifier() {
+	
+    }
 
     /**
      * Displays a pop up message that tells the result, status or error.
@@ -89,7 +95,7 @@ public class FileModifier extends JFrame {
      * @param strings
      *                configurations read from property file
      */
-    public void startModifying(String[] strings) {
+    public void startModifying(String[][] strings) {
 	this.strings = strings;
 	String curDirectory = "";
 	try {
@@ -164,25 +170,28 @@ public class FileModifier extends JFrame {
     }
 
     /**
-     * Parses the files stored in the pathList and if any of the following tags '<i>,
-     * </i>, <b> and </b>' are found then they are removed.
+     * Parses the files stored in the pathList and if any of the provided
+     * strings are found then they are removed.
      * 
      * @throws IOException
      */
     private void parseFiles() throws IOException {
 	try {
 	    for (String path : pathList) {
+		
 		log.appendLine("Scanning file: " + path, false);
+		
 		StringBuilder bufer = readFile(path);
 		String buferAsString = "";
 		if (bufer.length() > 0) {
 		    buferAsString = bufer.toString();
 		    for (int i = 0; i < strings.length; i++) {
-			buferAsString = buferAsString.replaceAll(strings[i],
-				EMPTY_STRING);
+			buferAsString = buferAsString.replaceAll(strings[i][0],
+				strings[i][1]);
 		    }
 		}
 		writeFile(buferAsString, path);
+		
 		log.appendLine("Done", false);
 	    }
 	} catch (Exception e) {
