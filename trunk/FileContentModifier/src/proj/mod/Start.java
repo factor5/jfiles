@@ -29,7 +29,7 @@ public class Start {
      */
     public String[] loadProperties() throws MissingResourceException {
 	bundle = ResourceBundle.getBundle("config");
-	String PREFIX = bundle.getString("prefix");
+	final String PREFIX = bundle.getString("prefix");
 	FileModifier.FILE_EXT_TYPE = bundle.getString("fileExt");
 	List<String> strings = new LinkedList<String>();
 	Set<String> keys = bundle.keySet();
@@ -43,18 +43,41 @@ public class Start {
     }
 
     /**
+     * 
+     * @param strings
+     * @return
+     */
+    public String[][] separate(final String[] strings) {
+	final String[][] separatedStrings = new String[strings.length][strings.length];
+	final String EMPTY_STRING = "";
+	for (int i = 0; i < strings.length; i++) {
+	    String[] temp = strings[i].split("\\|");
+	    separatedStrings[i][0] = temp[0];
+	    if (temp.length == 1) {
+		separatedStrings[i][1] = EMPTY_STRING;
+	    } else {
+		separatedStrings[i][1] = temp[1];
+	    }
+	}
+
+	return separatedStrings;
+    }
+
+    /**
      * @param args
      */
     public static void main(String args[]) {
 	Start starter = new Start();
-	FileModifier sm = new FileModifier();
 	String[] strings = null;
+	FileModifier sm = null;
 	try {
 	    strings = starter.loadProperties();
+
 	    if (strings == null) {
 		throw new Exception();
 	    }
-	    sm.startModifying(strings);
+	    sm = new FileModifier();
+	    sm.startModifying(starter.separate(strings));
 	} catch (MissingResourceException e) {
 	    sm
 		    .displayMessage(
