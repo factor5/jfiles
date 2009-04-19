@@ -5,7 +5,7 @@ HISTORY of the FileContentModifier
   -------------------------
     - Searching the configuration file in the same directory. 
       No need to have same name as required.
-    - Option not only to remove strings but to replace too.
+    + Option not only to remove strings but to replace too.
     + Work log will be displayed in a window pop up real-time.
     - Localization through external files.
 
