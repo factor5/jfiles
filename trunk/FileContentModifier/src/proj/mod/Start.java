@@ -3,11 +3,9 @@
  */
 package proj.mod;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.Set;
+
+import proj.mod.logger.WindowLogger;
 
 /**
  * @author Svilen Velikov
@@ -16,76 +14,29 @@ import java.util.Set;
  */
 public class Start {
 
-    private ResourceBundle bundle = null;
-
-    /**
-     * Loads configuration based in properties file. It sets the file type
-     * extension taken from configuration file and loads all strings that should
-     * be replaced. Those strings are found by its prefix also taken from
-     * configuration.
-     * 
-     * @return an array of strings
-     * @throws MissingResourceException
-     */
-    public String[] loadProperties() throws MissingResourceException {
-	bundle = ResourceBundle.getBundle("config");
-	final String PREFIX = bundle.getString("prefix");
-	FileModifier.FILE_EXT_TYPE = bundle.getString("fileExt");
-	List<String> strings = new LinkedList<String>();
-	Set<String> keys = bundle.keySet();
-	for (String key : keys) {
-	    if (key.startsWith(PREFIX)) {
-		strings.add(bundle.getString(key));
-	    }
-	}
-	return strings.size() != 0 ? strings
-		.toArray(new String[strings.size()]) : null;
-    }
-
-    /**
-     * 
-     * @param strings
-     * @return
-     */
-    public String[][] separate(final String[] strings) {
-	final String[][] separatedStrings = new String[strings.length][strings.length];
-	final String EMPTY_STRING = "";
-	for (int i = 0; i < strings.length; i++) {
-	    String[] temp = strings[i].split("\\|");
-	    separatedStrings[i][0] = temp[0];
-	    if (temp.length == 1) {
-		separatedStrings[i][1] = EMPTY_STRING;
-	    } else {
-		separatedStrings[i][1] = temp[1];
-	    }
-	}
-
-	return separatedStrings;
-    }
-
     /**
      * @param args
      */
     public static void main(String args[]) {
-	Start starter = new Start();
-	String[] strings = null;
-	FileModifier sm = null;
+	String[][] strings = null;
+	FileModifier fmod = null;
+	Util util = Util.getInstance();
 	try {
-	    strings = starter.loadProperties();
+	    strings = util.loadProperties();
 
 	    if (strings == null) {
 		throw new Exception();
 	    }
-	    sm = new FileModifier();
-	    sm.startModifying(starter.separate(strings));
+	    fmod = new FileModifier(util.getFileExtensionType(), strings, new WindowLogger());
+	    fmod.modify();
 	} catch (MissingResourceException e) {
-	    sm
+	    fmod
 		    .displayMessage(
 			    "Application can't be started because of missing config.properties file or wrong format!",
 			    "Error", Byte.valueOf("1"));
 	    e.printStackTrace();
 	} catch (Exception e) {
-	    sm
+	    fmod
 		    .displayMessage(
 			    "There are no strings found for replacement in config file!",
 			    "Error", Byte.valueOf("1"));

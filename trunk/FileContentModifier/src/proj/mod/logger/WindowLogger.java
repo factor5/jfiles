@@ -3,6 +3,7 @@
  */
 package proj.mod.logger;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
@@ -50,6 +51,7 @@ public class WindowLogger extends JFrame implements ILogger {
 	this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 	logPanel = new JTextPane();
+	logPanel.setEditable(false);
 	doc = logPanel.getStyledDocument();
 
 	JScrollPane scroll = new JScrollPane(logPanel);
@@ -70,13 +72,8 @@ public class WindowLogger extends JFrame implements ILogger {
      *                shows if the text should have bold style
      */
     @Override
-    public void appendText(final String text, boolean bold) {
-	Style s = null;
-	if (bold) {
-	    s = doc.addStyle("bold", null);
-	    StyleConstants.setBold(s, true);
-	}
-	printText(text, s);
+    public void appendText(final String text, final int styleType) {
+	printText(text, getStyle(styleType));
     }
 
     /**
@@ -89,13 +86,8 @@ public class WindowLogger extends JFrame implements ILogger {
      *                shows if the provided text should be printed in bold
      */
     @Override
-    public void appendLine(final String text, final boolean bold) {
-	Style s = null;
-	if (bold) {
-	    s = doc.addStyle("bold", null);
-	    StyleConstants.setBold(s, true);
-	}
-	printText(text + LINE_BREAK, s);
+    public void appendLine(final String text, final int styleType) {
+	printText(text + LINE_BREAK, getStyle(styleType));
     }
 
     /**
@@ -116,6 +108,32 @@ public class WindowLogger extends JFrame implements ILogger {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+
+    /**
+     * 
+     * @param styleType
+     * @return
+     */
+    private Style getStyle(final int styleType) {
+	Style s = null;
+	switch (styleType) {
+	case 1:
+	    s = doc.addStyle("bold", null);
+	    StyleConstants.setBold(s, true);
+	    break;
+	case 2:
+	    s = doc.addStyle("red", null);
+	    StyleConstants.setForeground(s, Color.RED);
+	    break;
+	case 3:
+	    s = doc.addStyle("plain", null);
+	    StyleConstants.setBold(s, false);
+	    break;
+	default:
+	    break;
+	}
+	return s;
     }
 
 }
