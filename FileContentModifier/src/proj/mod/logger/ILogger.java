@@ -10,8 +10,8 @@ package proj.mod.logger;
  */
 public interface ILogger {
 
-    void appendText(String text, boolean bold);
+    void appendText(String text, int styleType);
 
-    void appendLine(String text, boolean bold);
+    void appendLine(String text, int styleType);
 
 }

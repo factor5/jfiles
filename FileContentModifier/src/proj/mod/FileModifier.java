@@ -17,7 +17,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import proj.mod.logger.WindowLogger;
+import proj.mod.logger.ILogger;
+import proj.mod.logger.TextStyle;
 
 /**
  * FileModifier is a class that provide methods for tracing the directory where
@@ -32,6 +33,19 @@ import proj.mod.logger.WindowLogger;
 public class FileModifier extends JFrame {
 
     private static final long serialVersionUID = -9056510793502618924L;
+
+    /**
+     * Message constants
+     */
+    public static String FILE_EXT_TYPE;
+    private static final String CANT_SEARCH_DIR_ERROR = "Current directory cannot be traced!";
+    private static final String NO_FILES_FOUND_INFO = "There aren't subtitle files!";
+    private static final String IO_ERROR = "IO error!";
+    private static final String INIT_PARAM_ERROR = "Wrong type or missing parameter error!";
+    private static final String READY_MESSAGE = "End of scanning!";
+    private static final String TITLE_ERROR = "Error";
+    private static final String TITLE_RESULT = "Result";
+    private static final String EMPTY_STRING = "";
 
     /**
      * Line separator.
@@ -50,43 +64,34 @@ public class FileModifier extends JFrame {
     private String[][] strings = null;
 
     /**
-     * Reference to window logger.
+     * Reference to logger.
      */
-    private WindowLogger log;
+    private ILogger log;
 
     /**
-     * Message constants
-     */
-    public static String FILE_EXT_TYPE;
-    private static final String CANT_SEARCH_DIR_ERROR = "Current directory cannot be traced!";
-    private static final String NO_FILES_FOUND_INFO = "There aren't subtitle files!";
-    private static final String IO_ERROR = "IO error!";
-    private static final String READY_MESSAGE = "End of scanning!";
-    private static final String TITLE_ERROR = "Error";
-    private static final String TITLE_RESULT = "Result";
-    private static final String EMPTY_STRING = "";
-    private static final byte MESS_TYPE_ERR = 0;
-    private static final byte MESS_TYPE_INFO = 1;
-    
-    /**
+     * Initializing constructor.
      * 
+     * @param fileExt
+     *                the extension file type that this application will search
+     *                for
+     * @param strings
+     *                the matrix with source and replacement strings
+     * @param log
+     *                the logger
+     * @throws IllegalArgumentException
+     *                 if any of the arguments is missing or irrelevant
      */
-    public FileModifier() {
-	
-    }
-
-    /**
-     * Displays a pop up message that tells the result, status or error.
-     * 
-     * @param msg
-     *                the message that should be displayed.
-     * @param title
-     *                the title for this pop up window
-     * @param type
-     *                the type of the option pane (error=0, warning=1)
-     */
-    public void displayMessage(String msg, String title, byte type) {
-	JOptionPane.showMessageDialog(null, msg, title, type);
+    public FileModifier(String fileExt, String[][] strings, ILogger log)
+	    throws IllegalArgumentException {
+	if (fileExt.isEmpty() || strings == null || strings.length == 0
+		|| log == null) {
+	    displayMessage(INIT_PARAM_ERROR, TITLE_ERROR, MessageType.ERROR
+		    .get());
+	    throw new IllegalArgumentException(INIT_PARAM_ERROR);
+	}
+	this.FILE_EXT_TYPE = fileExt;
+	this.strings = strings;
+	this.log = log;
     }
 
     /**
@@ -95,38 +100,37 @@ public class FileModifier extends JFrame {
      * @param strings
      *                configurations read from property file
      */
-    public void startModifying(String[][] strings) {
-	this.strings = strings;
+    public void modify() {
 	String curDirectory = "";
 	try {
 	    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-	    log = new WindowLogger();
 	    pathList = new ArrayList<String>();
 
 	    curDirectory = findCurrentDirectory();
-	    log.appendLine("Current directory:", true);
-	    log.appendLine(curDirectory, false);
+	    log.appendLine("Current directory:", TextStyle.BOLD.style());
+	    log.appendLine(curDirectory, TextStyle.PLAIN.style());
 
 	    File current = new File(curDirectory);
 
-	    log.appendLine("\nFound files:", true);
+	    log.appendLine("\nFound files:", TextStyle.BOLD.style());
 	    findFiles(current);
 
 	    if (pathList.size() == 0) {
 		displayMessage(NO_FILES_FOUND_INFO, TITLE_RESULT,
-			MESS_TYPE_INFO);
+			MessageType.INFO.get());
 		return;
 	    }
 
-	    log.appendLine("\nStart parsing files:", true);
+	    log.appendLine("\nStart parsing files:", TextStyle.BOLD.style());
 	    parseFiles();
 
-	    log.appendLine("\nJob done!", true);
+	    log.appendLine("\nJob done!", TextStyle.BOLD.style());
 	    // displayMessage(READY_MESSAGE, TITLE_RESULT, MESS_TYPE_INFO);
 	} catch (IOException e) {
+	    log.appendLine(e.getMessage(), TextStyle.RED.style());
+	    displayMessage(e.getMessage(), TITLE_ERROR, MessageType.ERROR.get());
 	    e.printStackTrace();
-	    displayMessage(e.getMessage(), TITLE_ERROR, MESS_TYPE_ERR);
 	} finally {
 	    this.setCursor(Cursor.getDefaultCursor());
 	}
@@ -178,9 +182,9 @@ public class FileModifier extends JFrame {
     private void parseFiles() throws IOException {
 	try {
 	    for (String path : pathList) {
-		
-		log.appendLine("Scanning file: " + path, false);
-		
+
+		log.appendLine("Scanning file: " + path, TextStyle.PLAIN.style());
+
 		StringBuilder bufer = readFile(path);
 		String buferAsString = "";
 		if (bufer.length() > 0) {
@@ -191,8 +195,8 @@ public class FileModifier extends JFrame {
 		    }
 		}
 		writeFile(buferAsString, path);
-		
-		log.appendLine("Done", false);
+
+		log.appendLine("Done", TextStyle.PLAIN.style());
 	    }
 	} catch (Exception e) {
 	    throw new IOException(IO_ERROR);
@@ -239,7 +243,7 @@ public class FileModifier extends JFrame {
 	    if (current.isFile()) {
 		if (current.getName().endsWith(FILE_EXT_TYPE)) {
 		    pathList.add(current.getCanonicalPath());
-		    log.appendLine(current.getCanonicalPath(), false);
+		    log.appendLine(current.getCanonicalPath(), 3);
 		}
 	    } else {
 		File[] siblings = current.listFiles();
@@ -265,6 +269,35 @@ public class FileModifier extends JFrame {
 	    return currentDirectory;
 	} catch (Exception e) {
 	    throw new IOException(CANT_SEARCH_DIR_ERROR);
+	}
+    }
+
+    /**
+     * Displays a pop up message that tells the result, status or error.
+     * 
+     * @param msg
+     *                the message that should be displayed.
+     * @param title
+     *                the title for this pop up window
+     * @param type
+     *                the type of the option pane (error=0, warning=1)
+     */
+    public void displayMessage(String msg, String title, int type) {
+	JOptionPane.showMessageDialog(null, msg, title, type);
+    }
+
+    enum MessageType {
+
+	ERROR(0), INFO(1);
+
+	int type;
+
+	private MessageType(int type) {
+	    this.type = type;
+	}
+
+	public int get() {
+	    return type;
 	}
     }
 }
